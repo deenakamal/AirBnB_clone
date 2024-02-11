@@ -17,7 +17,6 @@ class HBNBCommand(cmd.Cmd):
     """ cmd class """
     prompt = "(hbnb) "
 
-
     def do_quit(self, line):
         """To Exit the program"""
         return True
@@ -89,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        
+
         elif class_name not in models.storage.CLASSES_DICT:
             print("** class doesn't exist **")
             return
