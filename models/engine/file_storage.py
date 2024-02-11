@@ -39,11 +39,11 @@ class FileStorage():
         """"
         Serialize BaseModel objects in __objects to json objects
         """
-        dict_objs = {}
-        for key, val in self.__objects.items():
-            dict_objs[key] = val.to_dict()
         with open(self.__file_path, "w", encoding='utf-8') as file_:
-            json.dump(dict_objs, file_, indent=4)
+            dic_ = {}
+            for key, value in self.__objects.items():
+                dic_[key] = value.to_dict()
+            json.dump(dic_, file_)
 
     def new(self, obj):
         """adds new objects to __objects"""
@@ -57,12 +57,8 @@ class FileStorage():
                 json_objects = json.load(file_)
             for key, serialized_obj in json_objects.items():
                 constractor = serialized_obj["__class__"]
+                class_n = CLASSES_DICT(**serialized_obj)
+                self.__objects[key] = class_n
 
-                if class_name in classes_dict:
-                    class_n = classes_dict(**serialized_obj)
-                    self.__objects[key] = instance
-
-        except FileNotFoundError:
-            pass
         except Exception as e:
             pass

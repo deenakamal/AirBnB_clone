@@ -66,21 +66,25 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line: command
         """
-        class_name, *args = line.split()
+        objects = models.storage.all()
+        if not line:
+            result = []
+            for obj in objects.values():
+                result.append(str(obj))
+            print(result)
+            return
+        args = line.split()
         if len(args) == 1:
             class_name = args[0]
 
         if class_name and class_name not in models.storage.CLASSES_DICT:
             print("** class doesn't exist **")
             return
-
-        objects = models.storage.all()
-        for key, val in objects.items():
-            if class_name:
-                if key.startswith(class_name):
-                    print(str(val))
-            else:
-                print(str(val))
+        all = []
+        for obj in objects.values():
+            if obj.__class__.__name__ == args[0]:
+                all.append(str(obj))
+        print(all)
 
     def do_show(self, line):
         """ method to show command to print
@@ -134,6 +138,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             objects.pop(key)
             models.storage.save()
+
     def do_update(self, line):
         """Update an instance based on the class name and id"""
         args = line.split()
