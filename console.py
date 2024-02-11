@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     cmds = ['EOF', 'help', 'quit', 'all',
             'count', 'show', 'destroy', 'update', 'create']
-    classes_names = models.storage.CLASSES_DICT
+    cls_names = models.storage.CLASSES_DICT
 
     def do_quit(self, line):
         """To Exit the program"""
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
         """
         count = 0
         _list = line.split()
-        if _list[0] in self.classes_names:
+        if _list[0] in self.cls_names:
             for key in models.storage.all().keys():
                 if new_list[0] in key:
                     count += 1
@@ -182,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** Unknown syntax:", method)
                 return
             class_name = ".".join(words[:-1])
-            if class_name not in self.cls_objs:
+            if class_name not in self.cls_names:
                 print("** class doesn't exist **")
                 return
 
