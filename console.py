@@ -16,7 +16,8 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """ cmd class """
     prompt = "(hbnb) "
-    cmds = ['all', 'count', 'show', 'destroy', 'update', 'create']
+    cmds = ['EOF', 'help', 'quit', 'all',
+            'count', 'show', 'destroy', 'update', 'create']
     cls_objs = models.storage.CLASSES_DICT
 
     def do_quit(self, line):
