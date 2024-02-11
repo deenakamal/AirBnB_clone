@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         _list = line.split()
         if _list[0] in self.cls_names:
             for key in models.storage.all().keys():
-                if new_list[0] in key:
+                if _list[0] in key:
                     count += 1
         print(count)
 
