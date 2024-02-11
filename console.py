@@ -15,7 +15,12 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ cmd class """
-    prompt = "(hbnb) "
+    def __init__(self):
+        """ init method """
+        super().__init__()
+        self.prompt = "(hbnb) "
+        self.cmds = 'all count show destroy update create'.split()
+        self.cls_objs = models.storage.CLASSES_DICT
 
     def do_quit(self, line):
         """To Exit the program"""
@@ -132,6 +137,59 @@ class HBNBCommand(cmd.Cmd):
         else:
             objects.pop(key)
             models.storage.save()
+    def do_update(self, line):
+        """Update an instance based on the class name and id"""
+        args = line.split()
+
+        if len(args) < 4:
+            print("** Not enough arguments for update **")
+            return
+
+        class_name = args[0]
+        obj_id = args[1]
+        attribute_name = args[2]
+
+        if class_name not in models.storage.CLASSES_DICT:
+            print("** Class doesn't exist **")
+            return
+        key = "{}.{}".format(class_name, obj_id)
+        objects = models.storage.all()
+        if key not in objects:
+            print("** No instance found **")
+            return
+
+        obj = objects[key]
+
+        attribute_value = eval(args[3])
+        setattr(obj, attribute_name, attribute_value)
+        obj.save()
+
+    def default(self, line):
+        """Executes a command."""
+        words = line.split('.')
+        if "(" in words[-1] and ")" in words[-1]:
+            method_and_args = words[-1].split("(")
+            method = method_and_args[0]
+            args = method_and_args[1].rstrip(")").split(",")
+
+            if method not in self.cmds:
+                print("** Unknown syntax:", method)
+                return
+            class_name = ".".join(words[:-1])
+            if class_name not in self.cls_objs:
+                print("** class doesn't exist **")
+                return
+
+            function = getattr(self, "do_" + method)
+            full_args = " ".join([class_name] + args)
+            function(full_args)
+        else:
+            command = words[0]
+            if command not in self.cmds:
+                print("** Unknown syntax:", command)
+                return
+            function = getattr(self, "do_" + command)
+            function(" ".join(words[1:]))
 
 
 if __name__ == "__main__":
