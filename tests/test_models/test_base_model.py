@@ -39,6 +39,14 @@ class BaseModelTests(unittest.TestCase):
         self.assertIsInstance(self.model_obj.created_at, datetime.datetime)
         self.assertIsInstance(self.model_obj.updated_at, datetime.datetime)
 
+    def test_save(self):
+        """testing the save class method """
+        before_time = self.model_obj.updated_at
+        self.model_obj.my_number = 33
+        self.model_obj.save()
+        new_time = self.model_obj.updated_at
+        self.assertNotEqual(before_time, new_time)
+
 
 if __name__ == '__main__':
     unittest.main(i)
