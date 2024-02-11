@@ -14,7 +14,7 @@ class FileStorage():
     """
     FileStorage class
     """
-    classes_dict = {
+    CLASSES_DICT = {
             "BaseModel": BaseModel,
             "User": User,
             "City": City,
@@ -42,8 +42,8 @@ class FileStorage():
         dict_objs = {}
         for key, val in self.__objects.items():
             dict_objs[key] = val.to_dict()
-        with open(self.__file_path, "w", encoding='utf-8') as f:
-            json.dump(dict_objs, f, indent=4)
+        with open(self.__file_path, "w", encoding='utf-8') as file_:
+            json.dump(dict_objs, file_, indent=4)
 
     def new(self, obj):
         """adds new objects to __objects"""
@@ -53,8 +53,8 @@ class FileStorage():
     def reload(self):
         """BaseModel class representing format."""
         try:
-            with open(self.__file_path, "r", encoding='utf-8') as f:
-                json_objects = json.load(file)
+            with open(self.__file_path, "r", encoding='utf-8') as file_:
+                json_objects = json.load(file_)
             for key, serialized_obj in json_objects.items():
                 constractor = serialized_obj["__class__"]
 
