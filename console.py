@@ -24,17 +24,17 @@ class HBNBCommand(cmd.Cmd):
         """To Exit the program"""
         return True
 
+    def do_EOF(self, line):
+        """EOf exit """
+        return True
+
     def emptyline(self):
         """Empty line."""
         pass
 
-    def do_quit(self, line):
-        """To Exit the program"""
-        return True
-
     def do_help(self, line):
         """Help to show docstring for a command"""
-        print("Quit command to exit the program")
+        cmd.Cmd.do_help(self, line)
 
     def do_count(self, line):
         """Count command to retrieve the number of instances
