@@ -15,12 +15,9 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ cmd class """
-    def __init__(self):
-        """ init method """
-        super().__init__()
-        self.prompt = "(hbnb) "
-        self.cmds = 'all count show destroy update create'.split()
-        self.cls_objs = models.storage.CLASSES_DICT
+    prompt = "(hbnb) "
+    cmds = ['all', 'count', 'show', 'destroy', 'update', 'create']
+    cls_objs = models.storage.CLASSES_DICT
 
     def do_quit(self, line):
         """To Exit the program"""
@@ -36,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, line):
         """Help to show docstring for a command"""
-        cmd.Cmd.do_help(self, line)
+        print("Quit command to exit the program")
 
     def do_count(self, line):
         """Count command to retrieve the number of instances
