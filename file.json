@@ -1,9 +1,8 @@
 {
-    "User.5aefd91a-f10d-418b-9f18-dcb2a89f6565": {
-        "id": "5aefd91a-f10d-418b-9f18-dcb2a89f6565",
-        "created_at": "2024-02-11T13:04:47.476634",
-        "updated_at": "2024-02-11T13:06:21.166325",
-        "\"first_name\"": "deena",
-        "__class__": "User"
+    "BaseModel.f6a34815-156f-4ca1-8bbe-dc2ed4241c8b": {
+        "id": "f6a34815-156f-4ca1-8bbe-dc2ed4241c8b",
+        "created_at": "2024-02-11T13:12:39.534043",
+        "updated_at": "2024-02-11T13:12:39.534061",
+        "__class__": "BaseModel"
     }
 }
