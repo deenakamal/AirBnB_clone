@@ -47,6 +47,15 @@ class BaseModelTests(unittest.TestCase):
         new_time = self.model_obj.updated_at
         self.assertNotEqual(before_time, new_time)
 
+    def test_to_dict(self):
+        """ test cases for to_dict method """
+        returned_dict = self.model_obj.to_dict()
+        expcted_dict = self.model_obj.__dict__.copy()
+        expcted_dict["__class__"] = self.model_obj.__class__.__name__
+        expcted_dict["updated_at"] = self.model_obj.updated_at.isoformat()
+        expcted_dict["created_at"] = self.model_obj.created_at.isoformat()
+        self.assertDictEqual(expcted_dict, returned_dict)
+
 
 if __name__ == '__main__':
     unittest.main(i)
