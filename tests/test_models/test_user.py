@@ -32,7 +32,7 @@ class TestUser(unittest.TestCase):
         before_user_up = user.updated_at
         user.email = "updated@example.com"
         after_user_up = user.updated_at
-        self.assertEqual(before_user_up, after_user_up )
+        self.assertEqual(before_user_up, after_user_up)
 
 
 if __name__ == '__main__':
